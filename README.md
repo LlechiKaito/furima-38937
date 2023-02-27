@@ -1,24 +1,22 @@
-# README
+<h1>データベース設計</h1>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="/Users/user/projects/furima-38937/database.png" alt="データベース設計">
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<h2>Usersテーブル</h2>
+name: :string型<br>
+address: :string型<br>
+profile: :text型<br>
+email: :string型<br>
+password: :string型<br>
+<h2>itemsテーブル</h2>
+item_name: :string型<br>
+content: :text型<br>
+price: :integer型<br>
+user_id: :references型<br>
+<h2>ordersテーブル</h2>
+user_id: :references型<br>
+item_id: :references型<br>
+<h2>アソシエーション</h2>
+usersとitemsは、1対多(多=items)<br>
+usersとordersは、1対多(多=orders)<br>
+ordersとitemsは、1対1<br>
