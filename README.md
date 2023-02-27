@@ -1,6 +1,6 @@
 <h1>データベース設計</h1>
 
-<img src="/Users/user/projects/furima-38937/database.png" alt="データベース設計">
+<img src="database.png" alt="データベース設計">
 
 <h2>Usersテーブル</h2>
 name: :string型<br>
