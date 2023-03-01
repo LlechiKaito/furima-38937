@@ -31,7 +31,7 @@ has_many :orders
 | user             | references | null: false, foreign_key: true |
 
 belongs_to :user<br>
-has_one :orders
+has_one :order
 
 ## orders テーブル
 
