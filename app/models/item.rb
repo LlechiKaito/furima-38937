@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   validates :shipping_area_id, presence: true
   validates :days_left_id, presence: true
   validates :category_id, presence: true
-  validates :image, attached_file_presence: true
+
+  validates :avatar, presence: true, blob: { content_type: :image }
 
 end
