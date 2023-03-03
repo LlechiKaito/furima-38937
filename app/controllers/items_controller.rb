@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
     if user_signed_in?
       @item = Item.new
     else
-      render action: :index
+      render :index
     end
   end
 
@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      render action: :new
+      render :new
     end
   end
 

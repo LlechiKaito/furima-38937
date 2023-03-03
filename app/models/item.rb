@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   validates :content, presence: true
   validates :condition_id, presence: true
   validates :shipping_fee_id, presence: true
@@ -11,6 +11,6 @@ class Item < ApplicationRecord
   validates :days_left_id, presence: true
   validates :category_id, presence: true
 
-  validates :avatar, presence: true, blob: { content_type: :image }
+  validates :image, presence: true, blob: { content_type: :image }
 
 end
