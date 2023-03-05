@@ -3,7 +3,7 @@ FactoryBot.define do
     name {Faker::Lorem.sentence}
     price {Faker::Number.between(from: 300, to: 9999999)}
     content {Faker::Lorem.sentence}
-    condition_id {Faker::Number.between(from: 1, to: 6)}
+    condition_id {Faker::Number.between(from: 1, to: 5)}
     shipping_fee_id {Faker::Number.between(from: 1, to: 2)}
     shipping_area_id {Faker::Number.between(from: 1, to: 47)}
     days_left_id {Faker::Number.between(from: 1, to: 3)}
@@ -12,8 +12,8 @@ FactoryBot.define do
     
     association :user
 
-    after(:build) do |message|
-      message.image.attach(io: File.open('public/images/test_image.jpeg'), filename: 'test_image.jpeg')
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/test_image.jpeg'), filename: 'test_image.jpeg')
     end
   end
 end

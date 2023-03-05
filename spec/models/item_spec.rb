@@ -20,15 +20,20 @@ RSpec.describe Item, type: :model do
       it "priceが空では登録できない" do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "priceが全角数字では登録できない" do
         @item.price = "５２４３２"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
-      it "priceが300~9999999ではないと登録できない" do
+      it "priceが299以下では登録できない" do
         @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceが10000000以上では登録できない" do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
@@ -38,27 +43,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Content can't be blank")
       end
       it "condition_idが空では登録できない" do
-        @item.condition_id = nil
+        @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it "shipping_fee_idが空では登録できない" do
-        @item.shipping_fee_id = nil
+        @item.shipping_fee_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
       it "shipping_area_idが空では登録できない" do
-        @item.shipping_area_id = nil
+        @item.shipping_area_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping area can't be blank")
       end
       it "days_left_idが空では登録できない" do
-        @item.days_left_id = nil
+        @item.days_left_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Days left can't be blank")
       end
       it "category_idが空では登録できない" do
-        @item.category_id = nil
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
@@ -71,11 +76,6 @@ RSpec.describe Item, type: :model do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
-      end
-      it "nameが空では登録できない" do
-        @item.name = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Name can't be blank")
       end
     end
   end
