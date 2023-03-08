@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
+  before_action :item_find, only: [:show, :edit, :update]
 
   def index
-    @items = Item.order('created_at DESC')
+    @items = Item.order("created_at DESC")
   end
 
   def new
@@ -19,23 +20,19 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
-    return unless current_user[:id] != @item.user[:id]
-
-    @items = Item.order('created_at DESC')
-    render :index
+    if current_user[:id] != @item.user[:id]
+      @items = Item.order("created_at DESC")
+      render :index
+    end
   end
 
   def update
-    item = Item.find(params[:id])
-    if item.update(item_params)
-      redirect_to item_path(item)
+    if @item.update(item_params)
+      redirect_to item_path(@item)
     else
-      @item = item
       render :edit
     end
   end
@@ -43,7 +40,11 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :content, :price, :condition_id, :shipping_fee_id, :shipping_area_id,
-                                 :days_left_id, :category_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :content, :price, :condition_id, :shipping_fee_id, :shipping_area_id, :days_left_id, :category_id).merge(user_id: current_user.id)
   end
+
+  def item_find
+    @item = Item.find(params[:id])
+  end
+
 end
