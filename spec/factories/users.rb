@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: [:follow] do
     transient do
       person { Gimei.name }
     end
