@@ -63,6 +63,11 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Phone number isn't 10桁以上11桁以下")
     end
+    it "phone_numberが半角数字以外では登録できないこと" do
+      @order_address.phone_number = "１２３４５６７８９１"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number isn't 10桁以上11桁以下")
+    end
     it "item_idが空では登録できないこと" do
       @order_address.item_id = nil
       @order_address.valid?
